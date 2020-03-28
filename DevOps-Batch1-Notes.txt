@@ -1,0 +1,495 @@
+###################
+Day-1 :  15/02/2020
+###################
+
+Objective : Create a Cubensquare Fee application
+
+Usage : Student details can be registered and reports can be fetched
+
+Tools : 
+
+Java - Frontend
+Oracle - Backend
+
+###########################
+Traditional Infrastructure : 
+###########################
+Server / Laptop
+Windows
+Java
+Java code
+Jboss - Application server : serve dynamic pages
+Oracle
+Oracle query
+
+Drawbacks : 
+1. Reboot
+2. Dependencies
+3. Hardware
+
+Purchase 4 different server
+------------------------
+################
+Virtualization : 
+################
+
+Resources = CPU , Memory , Disk IO
+
+Call it as VirtualMachie or Server - 
+Each VM - I can install any OS
+
+Isolated environment : 
+OS
+Network - IP
+Hostname
+
+VM - Create multiple Virtual Machines on the same server with different Operating systems
+
+1 VM - Windows / Java & dependencies
+2nd VM - Linux / Oracle & dependencies
+3rd VM - Linux / Jboss & dependencies
+4th VM - Linux / Apache & dependencies
+
+Every VM , will have Operating system - which will consume more memory
+
+Compile the Java and get the WAR file - 
+
+Server - Windows
+VirtualMachie
+Install Operating System
+Install Java and its dependencies
+Apply the code
+
+
+VirtualMachie
+Install Operating System - Ubuntu Linux
+Install JBoss and configure
+Deploy application
+
+
+----------------
+################
+Containerization
+################
+
+All below components will be packed together as "Image" 
+
+Java code
+Java
+OS dependencies / filesystems
+Libraries
+
+With above image , I will create a container - No Operating system
+
+================
+
+
+Git  -  Version Control tool / Source Code Management
+Jfrog - Artifactory - 
+Jenkins - Continuous Integration - 
+Docker - Containers - 
+Kubernetes - To manage the containers - 
+Prometheus - To collect Metrics - 
+Grafana - To visualize the metrics - 
+
+3-tier architecture
+--------
+
+Exercise 1 : Create a GCP account
+
+GCP - Google Cloud Platform - 
+What you need - Credit card - Rs-1 will be debited . For 1 year , you will have a trail
+version worth of Rs-25,000
+
+===========================
+16/02/2020
+
+extensions : 
+
+ear - Enterprise / Enhanced archive
+war - Webarchive
+Jar - java archive
+
+
+Traditional architecture
+Virtualization
+Containerization - 
+
+Containers - 
+
+Docker Containers
+Podman containers [ Redhat ]
+rkt containers [ redhat ]
+cri-o containers
+Microsoft containers
+
+Hypervisor - is a piece of software to create/run/maintain the virtualmachines
+
+Docker package names :
+-------------------
+docker.ce [ Community Edition ]
+docker.ee [ Enterprise Edition ]
+docker.io [ specific for ubuntu machine ]
+
+=============
+
+
+
+docker run -it -p 8080:8080 -d pengbai/docker-supermario
+
+i --> interactive
+t --> terminal
+p --> portforwarding  [ hostport:targetport ]
+d --> detached mode
+
+
+#################
+Docker commands :
+#################
+
+Login to your GCP VM instance
+
+Step 1) sudo su - 
+Step 2) apt update
+Step 3) apt install docker.io -y
+
+Step 4) Practice below commands :
+
+1. docker
+2. docker version
+3. docker info
+4. docker stats
+5. docker system df
+6. docker images
+7. docker ps
+8. service docker status
+9. service docker stop
+10. service docker start
+11. systemctl enable docker
+12. docker run -it -p 8080:80 -d httpd
+13. docker run -it -p 8081:80 httpd
+14. docker ps -a
+15. docker ps -l
+16. docker inspect <container_id>
+17. docker exec -it <container_id> bash
+18. docker run -it -v /tmp/test:/tmp -p 8082:80 -d httpd
+19. docker top <container_id>
+20. docker logs <container_id>
+21. docker run -it -p 8084:80 --restart always -d httpd
+
+22. docker run busybox echo "hello"
+23. docker images
+24. docker run busybox echo "hello"
+25. docker run busybox ls /
+26. docker run -it busybox
+27. docker run -it -d busybox 
+28. docker run -it --rm busybox sleep 1
+29. docker ps -a
+30. docker run -it --name goms -d busybox
+31. docker ps -l
+32. docker inspect <container_id>
+34. docker images
+35. docker history busybox
+
+36. docker run -it -p 8087:80 -d httpd
+37. docker exec -it <container_id> /bin/sh
+cd htdocs
+echo "hello" >> index.html
+exit
+
+38. docker images
+39. docker ps -l
+40. docker commit <container_id> repository:tag or docker commit <container_id> <image_name>
+41. docker run -it -p 8887:80 -d <image_name-givenabove>
+
+42. Example A: [ TO SAVE A VI FILE ESC-KEY + :WQ! ]
+----------
+vi Dockerfile
+FROM debian
+run apt update
+run apt install git -y
+run apt install docker.io -y
+run apt install nano
+
+43. docker build . -it debian:1
+44. docker history <image_id>
+45. docker run -it -d debian:1
+46. docker exec -it <container_id> /bin/sh
+git
+docker
+nano
+
+
+docker chain run instructions
+-----------------------------
+47. Example A : 
+-----------
+
+vi Dockerfile
+FROM debian
+run apt update && apt install -y \
+    docker.io \
+    nano
+
+48. docker build . -it debian:2
+49. docker history <image_id>
+
+50. Example B:
+---------
+vi Dockerfile
+FROM debian
+run apt update && apt install -y \
+    docker.io \
+    nano
+copy abc.txt /tmp/abc.txt
+
+51. docker build . -it debian:3
+52. docker run -it -d debian:3
+53. docker exec -it <container_id> /bin/sh
+cd /tmp
+ls -lrt
+
+
+How to create our customized image : 
+-----------------------------------
+nano index.html
+cat index.html 
+nano Dockerfile
+cat Dockerfile 
+docker build . -t aashikwebserver
+Dockerfile --> is used to create our images
+docker build --> help to build the image
+
+-t --> tag
+
+
+======================================
+Webserver --> contain static pages
+
+webserver --> index.html ( default page )
+
+/usr/local/apache2/htdocs/index.html
+
+==================================================
+
+22/Feb/2020
+
+Docker server & client
+
+docker server = daemon --> process ==> /var/run/docker.sock
+
+docker client = docker command line - manage all my containers docker cmd = 
+
+
+
+======
+
+docker images has layers = base image , my modifications
+nginx - layer 1
+install docker - layer 2
+install nano - layer 3
+=========
+
+Requirement - Create a image with the base image of nginx , and have docker and nano tools installed in it . 
+Pack the new image and sent to us . 
+
+When my team create a container using the new image , they should c docker and nano tool inside the container
+
+
+Building an image called Mike with
+1. base image nginx
+2. updates
+3. install docker.io
+4. install nano
+
+
+docker tag <docker_accoutname>/<imagename>
+example : docker tag mgsgomu/mike
+docker images
+
+docker push <docker_accountname>/<imagename:tag>
+
+Image name format to push your image to docker hub : 
+---------------------------------------------------
+<dockerhub_accountname>/<imagename>
+
+========================================
+
+23/Feb/2020
+
+#####################################
+How to create a local docker registry :
+#####################################
+
+Local Registry url:port -  10.128.0.8:5000
+
+1) docker run -d -p 5000:5000 --name registry registry:2
+2) docker tag <image_id> <serverip:5000/httpd>
+3) docker images
+4) docker run -it -p 8080:80 -d 10.128.0.8:5000/httpd
+
+docker hub - common
+
+Company environment - We create local docker registry
+hub.docker.com
+hub.discover.com
+hub.comcast.com
+hub.cts.com
+
+Registry / Repository - 
+
+
+Docker Swarm / Kubernetes / Apache Mesos
+
+Kubernetes - Framework - Not a product
+
+AWS - EKS ( Elastic Kubernetes Service)
+Rancher
+Azure - AKS
+GCP - Google Kloud Engine
+Redhat Openshift
+
+Node = VM = Physical Machine = server = baremetal
+
+Kubernetes = K8S = kube
+
+Kubernetes = Single Node Cluster & Multi-Node Cluster
+
+Single Node Cluster = Minikube
+Multi-Node Cluster = Master & Worker Node Concept
+
+-----
+
+API Server = Application Programming Interface = Frontend of K8S = can access all K8S objects or resources using API server
+
+etcd = Key store value = stores details of the node/all other k8s objects transactions
+
+kubelet = Its a process running on worker node
+          acts as a bridge between worker node and master node
+
+Container runtime = docker containers
+
+controller = Endpoint controllers , replica controller , serviceaccount controller
+
+
+Scheduler = Schedules the POD (container ) on the respective nodes
+
+===============
+
+POD
+
+One of the k8s object or resources
+
+docker containers are encapsulated into the POD in K8S
+
+Single POD can have single container or multiple containers
+
+Each docker containers will have an IP address
+
+POD = POD along will have an IP address and not the containers
+
+==================
+01/March/2020
+
+
+Master Components : 
+-----------------
+API server
+etcd
+scheduler
+Controller
+
+Worker Components :
+-----------------
+kubelet
+container runtime
+kubeproxy
+
+kubernetes configuration file - kubeconfig
+location : $HOME/.kube/config
+kubectl config view  [ You can check the K8S config file ]
+
+POD Network - to communicate between pods present in different nodes
+
+POD Network plugins - Calico , Flannel , Weavenet
+CNI - Container Network Interface
+
+HLS - HTTP Live Streaming
+
+How many pod can be created in one single Node - 
+
+
+Difference between single-node cluster & Multi-node cluster
+
+How many containers can be created on one single pod - 
+
+====
+
+kubectl run --generator=run-pod/v1 prabhu --image=nginx
+kubectl expose pod prabhu --type=NodePort --port=8080
+
+To expose your image present inside the POD , K8S has the object called 'service'
+
+Your image can be exposed externally or internally
+
+Service types to expose your image : 
+------------------------------------
+1) Externally = NodePort  [ NodePort , ServicePort & targetPort]
+2) Internally = ClusterIP [ Serviceport & targetport ]
+
+K8S - ports 
+1) host port/NodePort ( being created by kubeproxy in the range of 30,000 to 32737 )
+2) servicePort ( port=8080 )
+3) target port ( image port - 80 ) 
+
+kubectl expose pod prabhu --type=NodePort --port=8080
+
+Example of docker cmd :
+---------------------
+docker run -it -p 8080:80 -d nginx
+
+====
+
+kubectl commands :
+------------------
+1) kubectl version
+2) kubectl version -o json
+3) kubectl version -o yaml
+4) kubectl api-resources [ this will list all the k8s object/resources]
+5) kubectl run --generator=run-pod/v1 deepan --image=nginx
+6) kubectl get pods
+7) kubectl describe pods <pod_name>
+8) kubectl expose pods deepan --type=NodePort --port=80
+9) kubectl describe service deepan
+10) kubectl get service
+
+[ Launch a browser , http://[masterip]:[nodePort] ]
+
+11) kubectl edit service deepan [ to edit the service ]
+===============================================
+
+docker - containers , images , port forwarding , how to create a customized image , how to push an image to the docker hub
+how to create a local docker registry
+
+docker containers , podman containers , crio containers , microsoft containers
+
+Kubernetes ( K8S , kube )
+
+- Container orchestration tool
+- Alternatives of K8S , mesos , docker swarm
+- K8S is framework / from this frame work , they defined , AWS-EKS,AKS,Google-CE,Redhat Openshift , Rancher
+- kubernetes Architecture
+- Kubernetes componenets : Master / Worker node
+  Master - API server , etcd,scheduler,controller
+  Worker - Kuberproxy , kubelet , container runtime
+- Kubernetes : Single node cluster & Multi node cluster
+
+POD - containers are encapsultated inside the POD
+      containers hold the images ( softwares/code/lib/dependencies/files )
+
+- How to install multinode cluster
+- kubectl commands / POD , service / describe
+- POD Network Plugin - to communciate with the pods available in different nodes
+
+=========================
+node port service port- /+ target port:image
